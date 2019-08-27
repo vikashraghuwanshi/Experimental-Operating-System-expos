@@ -1,0 +1,16 @@
+int main()
+{
+decl
+    int temp,num;
+    str p;
+enddecl
+begin
+    num=1;
+    p="INIT Process";
+    while ( num <= 100 ) do
+         temp = exposcall ( "Write" , -2, p );
+         num = num + 1;
+    endwhile;
+    return 0;
+end
+}
