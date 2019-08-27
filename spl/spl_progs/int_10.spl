@@ -1,0 +1,24 @@
+alias currentPID R0;
+currentPID = [SYSTEM_STATUS_TABLE+1];
+
+alias process_table_entry R1;
+process_table_entry = PROCESS_TABLE + currentPID * 16;
+
+[process_table_entry + 4] = TERMINATED;
+print "*currentPID*";
+
+alias cnt R0;
+cnt = 1;
+
+while(cnt < 16) do
+	if([PROCESS_TABLE + 16 * cnt + 4] != TERMINATED) then
+		call MOD_5;
+	endif;
+	cnt = cnt + 1;
+endwhile;
+
+if(cnt == 16) then
+	print "SHUTDOWN";
+	halt;
+	call MOD_5; // if doesn't want to halt comment halt command;
+endif;

@@ -1,0 +1,145 @@
+loadi(63,13);
+loadi(64,14);
+loadi(4,17);
+loadi(5,18);
+loadi(65,7);
+loadi(66,8);
+loadi(22,35);
+loadi(23,36);
+loadi(2, 15);
+loadi(3, 16);
+loadi(16,29);
+loadi(17,30);
+loadi(83,69); // process 2
+loadi(89,70); // process 3
+
+
+PTBR = PAGE_TABLE_BASE + 20;
+//Library
+[PTBR+0] = 63;
+[PTBR+1] = "0100";
+[PTBR+2] = 64;
+[PTBR+3] = "0100";
+
+//Heap
+[PTBR+4] = 78;
+[PTBR+5] = "0110";
+[PTBR+6] = 79;
+[PTBR+7] = "0110";
+
+//Code
+[PTBR+8] = 65;
+[PTBR+9] = "0100";
+[PTBR+10] = 66;
+[PTBR+11] = "0100";
+[PTBR+12] = -1;
+[PTBR+13] = "0000";
+[PTBR+14] = -1;
+[PTBR+15] = "0000";
+
+//Stack
+[PTBR+16] = 76;
+[PTBR+17] = "0110";
+[PTBR+18] = 77;
+[PTBR+19] = "0110";
+
+[PROCESS_TABLE + 17] = 1;
+[PROCESS_TABLE + 20] = CREATED;
+[PROCESS_TABLE + 27] = 80;
+[PROCESS_TABLE + 28] = 0;
+[PROCESS_TABLE + 29] = 8*512;
+[PROCESS_TABLE + 30] = PTBR;
+[PROCESS_TABLE + 31] = 10;
+
+[76*512] = [65 * 512 + 1];
+
+PTBR = PAGE_TABLE_BASE + 40;
+//Library
+[PTBR+0] = 63;
+[PTBR+1] = "0100";
+[PTBR+2] = 64;
+[PTBR+3] = "0100";
+
+//Heap
+[PTBR+4] = 86;
+[PTBR+5] = "0110";
+[PTBR+6] = 87;
+[PTBR+7] = "0110";
+
+//Code
+[PTBR+8] = 83;
+[PTBR+9] = "0100";
+[PTBR+10] = -1;
+[PTBR+11] = "0100";
+[PTBR+12] = -1;
+[PTBR+13] = "0000";
+[PTBR+14] = -1;
+[PTBR+15] = "0000";
+
+//Stack
+[PTBR+16] = 84;
+[PTBR+17] = "0110";
+[PTBR+18] = 85;
+[PTBR+19] = "0110";
+
+[PROCESS_TABLE + 16 + 17] = 2;
+[PROCESS_TABLE + 16 + 20] = CREATED;
+[PROCESS_TABLE + 16 + 27] = 88;
+[PROCESS_TABLE + 16 + 28] = 0;
+[PROCESS_TABLE + 16 + 29] = 8*512;
+[PROCESS_TABLE + 16 + 30] = PTBR;
+[PROCESS_TABLE + 16 + 31] = 10;
+
+[84*512] = [83 * 512 + 1];
+
+
+PTBR = PAGE_TABLE_BASE + 60;
+//Library
+[PTBR+0] = 63;
+[PTBR+1] = "0100";
+[PTBR+2] = 64;
+[PTBR+3] = "0100";
+
+//Heap
+[PTBR+4] = 92;
+[PTBR+5] = "0110";
+[PTBR+6] = 93;
+[PTBR+7] = "0110";
+
+//Code
+[PTBR+8] = 89;
+[PTBR+9] = "0100";
+[PTBR+10] = -1;
+[PTBR+11] = "0100";
+[PTBR+12] = -1;
+[PTBR+13] = "0000";
+[PTBR+14] = -1;
+[PTBR+15] = "0000";
+
+//Stack
+[PTBR+16] = 90;
+[PTBR+17] = "0110";
+[PTBR+18] = 91;
+[PTBR+19] = "0110";
+
+[PROCESS_TABLE + 32 + 17] = 2;
+[PROCESS_TABLE + 32 + 20] = CREATED;
+[PROCESS_TABLE + 32 + 27] = 94;
+[PROCESS_TABLE + 32 + 28] = 0;
+[PROCESS_TABLE + 32 + 29] = 8*512;
+[PROCESS_TABLE + 32 + 30] = PTBR;
+[PROCESS_TABLE + 32 + 31] = 10;
+
+[90*512] = [89 * 512 + 1];
+
+
+
+alias cnt R0;
+cnt = 4;
+
+while (cnt < 16) do
+      [PROCESS_TABLE + 16 * cnt + 4] = TERMINATED;
+      cnt = cnt + 1;
+    endwhile;
+
+return;
