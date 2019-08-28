@@ -18,7 +18,6 @@ while(cnt < 16) do
 endwhile;
 
 if(cnt == 16) then
-	print "SHUTDOWN";
-	halt;
-	call MOD_5; // if doesn't want to halt comment halt command;
+	call MOD_5; // idle process
 endif;
+

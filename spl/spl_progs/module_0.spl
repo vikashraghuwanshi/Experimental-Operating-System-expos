@@ -1,0 +1,35 @@
+alias functionNum R1;
+alias currentPID R2;
+alias cnt R6;
+cnt = 1;
+
+if(R1 == 8) then
+	while([TERMINAL_STATUS_TABLE] != 0) do
+		[PROCESS_TABLE + currentPID * 16 + 4] = WAIT_TERMINAL;
+		multipush(R0, R1, R2, R3);
+		call MOD_5;
+		multipop(R0, R1, R2, R3);
+	endwhile;
+	[TERMINAL_STATUS_TABLE] = 1;
+	[TERMINAL_STATUS_TABLE + 1] = currentPID;
+	print " ";
+	return;
+endif;
+
+if(R1 == 9) then
+	if([TERMINAL_STATUS_TABLE + 1] != currentPID) then 
+		R0 = -1;
+		return;
+	else
+		[TERMINAL_STATUS_TABLE] = 0;
+		while(cnt < 16) do
+			if([PROCESS_TABLE + cnt * 16 + 4] == WAIT_TERMINAL) then 
+				[PROCESS_TABLE + cnt * 16 + 4] = READY;
+			endif;
+			cnt = cnt + 1;
+		endwhile;
+		R0 = 0;
+		print " ";
+		return;
+	endif;
+endif;

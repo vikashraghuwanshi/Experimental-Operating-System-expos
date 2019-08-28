@@ -9,7 +9,6 @@ process_table_entry = PROCESS_TABLE + currentPID * 16;
 [process_table_entry + 15] = PTLR;
 
 
-
 alias newPID R2;
 alias cnt R4;
 alias k R5;
@@ -32,6 +31,8 @@ if(k == 0) then
 		newPID = currentPID;
 	else 
 		newPID = 0;
+		print "!SHUTDOWN!";
+		halt;
 	endif;
 endif;
 
@@ -53,6 +54,5 @@ endif;
 
 
 [new_process_table + 4] = RUNNING;
-
 
 return;
