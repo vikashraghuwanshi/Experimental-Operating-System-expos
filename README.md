@@ -1,1 +1,1 @@
-# SampleOS
+# Experimental Operating System
